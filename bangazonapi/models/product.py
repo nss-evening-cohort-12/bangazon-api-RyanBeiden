@@ -65,7 +65,7 @@ class Product(SafeDeleteModel):
 
         try:
             avg = total_rating / len(ratings)
-        except:
+        except ZeroDivisionError:
             avg = 0
             
         return avg
