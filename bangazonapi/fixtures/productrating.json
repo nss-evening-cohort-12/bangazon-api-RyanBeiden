@@ -13,7 +13,7 @@
         "pk": 2,
         "fields": {
             "product": 50,
-            "customer": 5,
+            "customer": 2,
             "rating": 3
         }
     },
@@ -22,7 +22,7 @@
         "pk": 3,
         "fields": {
             "product": 50,
-            "customer": 6,
+            "customer": 1,
             "rating": 5
         }
     },
@@ -31,7 +31,7 @@
         "pk": 4,
         "fields": {
             "product": 50,
-            "customer": 7,
+            "customer": 3,
             "rating": 1
         }
     }
