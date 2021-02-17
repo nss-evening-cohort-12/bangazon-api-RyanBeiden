@@ -46,8 +46,8 @@ def inexpensiveproduct_list(request):
                 product.image_path = row["image_path"]
                 product.category_id = row["category_id"]
                 product.customer_id = row["customer_id"]
-
-                inexpensive_products.append(product)
+                
+                inexpensive_products[row['id']] = product
 
         list_of_inexpensive_products = inexpensive_products.values()
 
