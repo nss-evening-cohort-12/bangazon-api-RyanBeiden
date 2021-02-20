@@ -95,6 +95,34 @@ class ProductTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(json_response), 3)
 
-    # TODO: Delete product
+    def test_rate_product(self):
+        """
+        Ensure that a rating can be added to a product and verify that the avg_rating key exists.
+        """
+        self.test_create_product()
 
-    # TODO: Product can be rated. Assert average rating exists.
+        ratings_url = "/ratings"
+        product_url = "/products/1"
+        data = {
+            "rating": 1,
+            "product": 1,
+        }
+
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token)
+
+        for x in range(1,4):
+            data['rating'] += 1
+            response = self.client.post(ratings_url, data, format='json')
+            json_response = json.loads(response.content)
+
+            self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+            self.assertEqual(json_response["rating"], data['rating'])
+            self.assertEqual(json_response["product"], 1)
+        
+        response = self.client.get(product_url, None, format="json")
+        json_response = json.loads(response.content)
+        
+        self.assertEqual(json_response["average_rating"], 3.0)
+
+
+    # TODO: Delete product
