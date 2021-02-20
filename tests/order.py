@@ -92,13 +92,18 @@ class OrderTests(APITestCase):
         """
         self.test_add_product_to_order()
 
-        url = "/order/1"
+        url = "/orders/1"
         data = { "payment_type": 1 }
 
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token)
         response = self.client.put(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+        response = self.client.get(url, data, format='json')
         json_response = json.loads(response.content)
-        print(json_response)
+        
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(int(json_response["payment_type"].split('/')[-1]), 1)
 
 
     # TODO: New line item is not added to closed order
