@@ -116,7 +116,7 @@ class ProductTests(APITestCase):
             json_response = json.loads(response.content)
 
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-            self.assertEqual(json_response["rating"], x + 1)
+            self.assertEqual(json_response["rating"], data['rating'])
             self.assertEqual(json_response["product"], 1)
         
         response = self.client.get(product_url, None, format="json")
